@@ -43,23 +43,31 @@
     .btn:hover { transform: translateY(-1px); transition: .15s ease; }
 
    /* Showcase */
+/* Showcase — elimina a caixa externa */
 .frame {
-  margin: 40px auto 24px;
-  max-width: 1000px;
-  /* tira a caixa */
-  border: none;
-  background: transparent;
-  border-radius: 0;
-  overflow: visible; /* não corta a sombra/hover */
+  display: contents;               /* faz o wrapper desaparecer */
+}
+
+/* fallback se o browser não suportar display: contents */
+@supports not (display: contents) {
+  .frame {
+    margin: 40px auto 24px;
+    max-width: 1000px;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+  }
 }
 
 .screens {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;              /* espaço real entre as imagens */
-  background: transparent;/* sem faixa de fundo entre elas */
+  gap: 24px;               /* separação real entre as imagens */
+  background: transparent; /* sem fundo de faixa */
+  padding: 8px 4px;        /* respiro nas laterais */
   position: relative;
-  padding: 8px 4px;       /* respiro nas laterais */
 }
 
 .screens img {
@@ -68,15 +76,12 @@
   aspect-ratio: 9 / 19.5;
   object-fit: cover;
   background: #0b1220;
-  border-radius: 22px;     /* cantos arredondados individuais */
+  border-radius: 22px;
   border: 1px solid rgba(148,163,184,.18);
   position: relative;
   z-index: 0;
-  box-shadow: 0 10px 24px rgba(0,0,0,.35); /* sombra de cartão */
-  transition:
-    transform .25s ease,
-    filter .25s ease,
-    box-shadow .25s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
   will-change: transform, filter;
   outline: none;
 }
