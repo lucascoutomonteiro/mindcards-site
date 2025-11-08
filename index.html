@@ -80,6 +80,28 @@
       .grid, .steps, .screens { grid-template-columns: 1fr; }
       .nav-links { display:none; }
     }
+
+    /* Destaque nas screenshots (desktop apenas) */
+@media (hover: hover) and (pointer: fine) {
+  .screens img {
+    transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+    will-change: transform, filter;
+  }
+  /* Ao entrar na grade, todos ficam um pouco mais “apagados”... */
+  .screens:hover img {
+    filter: brightness(.8) saturate(.9);
+  }
+  /* ...e a imagem sob o mouse (ou foco) ganha destaque */
+  .screens img:hover,
+  .screens img:focus-visible {
+    transform: translateY(-6px) scale(1.03);
+    filter: brightness(1.05) saturate(1.05);
+    box-shadow: 0 14px 28px rgba(0,0,0,.45),
+                0 0 0 1px rgba(148,163,184,.35) inset;
+    z-index: 1;
+  }
+}
+    
   </style>
 </head>
 <body>
