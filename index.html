@@ -57,7 +57,7 @@
 .screens img {
   display: block;
   width: 100%;
-  aspect-ratio: 9 / 19.5;    /* mesma altura para todas */
+  aspect-ratio: 9 / 19.5;
   height: auto;
   object-fit: cover;
   background: #0b1220;
@@ -66,9 +66,10 @@
   position: relative;
   z-index: 0;
   box-shadow: 0 10px 24px rgba(0,0,0,.35);
-  /* zera qualquer transformação herdada */
-  transform: none !important;
+  /* remova o 'transform: none !important;' */
+  transform: translateZ(0);              /* prepara para animação sem “tremido” */
   transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+  will-change: transform, filter;
   outline: none;
 }
     /* Features */
