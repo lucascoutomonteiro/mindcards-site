@@ -42,37 +42,49 @@
     .btn.secondary { background: transparent; color: var(--text); }
     .btn:hover { transform: translateY(-1px); transition: .15s ease; }
 
-    /* Showcase */
-    .frame {
-    margin: 40px auto 24px;
-      max-width: 880px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(148,163,184,.25);
-      background: linear-gradient(180deg, rgba(148,163,184,.12),
-                                   rgba(30,41,59,.35));
-    }
-    
-    .screens {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(148,163,184,.2);
-      position: relative; /* para isolar a pilha de z-index */
-    }
-    
-    .screens img {
-      width: 100%;
-      display: block;
-      aspect-ratio: 9 / 19.5;
-      object-fit: cover;
-      background: #0a0f1a;
-      position: relative;     /* permite z-index */
-      z-index: 0;
-      transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
-      will-change: transform, filter;
-      outline: none;          /* ajuda com :focus-visible */
-    }
+   /* Showcase */
+.frame {
+  margin: 40px auto 24px;
+  max-width: 1000px;
+  /* tira a caixa */
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  overflow: visible; /* não corta a sombra/hover */
+}
+
+.screens {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;              /* espaço real entre as imagens */
+  background: transparent;/* sem faixa de fundo entre elas */
+  position: relative;
+  padding: 8px 4px;       /* respiro nas laterais */
+}
+
+.screens img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 9 / 19.5;
+  object-fit: cover;
+  background: #0b1220;
+  border-radius: 22px;     /* cantos arredondados individuais */
+  border: 1px solid rgba(148,163,184,.18);
+  position: relative;
+  z-index: 0;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35); /* sombra de cartão */
+  transition:
+    transform .25s ease,
+    filter .25s ease,
+    box-shadow .25s ease;
+  will-change: transform, filter;
+  outline: none;
+}
+
+/* (Opcional) leve inclinação para ficar mais “hero” */
+.screens img:nth-child(1) { transform: rotate(-1.5deg); }
+.screens img:nth-child(2) { transform: rotate(.5deg); }
+.screens img:nth-child(3) { transform: rotate(-.5deg); }
 
     /* Features */
     .section { padding: 56px 0; }
@@ -108,26 +120,24 @@
       .nav-links { display:none; }
     }
 
-    /* Destaque nas screenshots (desktop apenas) */
+  /* Destaque nas screenshots (desktop apenas) */
 @media (hover: hover) and (pointer: fine) {
-  .screens img {
-    transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
-    will-change: transform, filter;
-  }
-  /* Ao entrar na grade, todos ficam um pouco mais “apagados”... */
+  /* ao entrar na grade, as demais ficam levemente apagadas */
   .screens:hover img {
-    filter: brightness(.8) saturate(.9);
+    filter: brightness(.88) saturate(.95);
   }
-  /* ...e a imagem sob o mouse (ou foco) ganha destaque */
+
+  /* foco do mouse/teclado ganha destaque e sobe um pouco */
   .screens img:hover,
   .screens img:focus-visible {
-    transform: translateY(-6px) scale(1.03);
+    transform: translateY(-8px) scale(1.03) rotate(0deg); /* reduz a inclinação no hover */
     filter: brightness(1.05) saturate(1.05);
-    box-shadow: 0 14px 28px rgba(0,0,0,.45),
-                0 0 0 1px rgba(148,163,184,.35) inset;
-    z-index: 1;
+    box-shadow:
+      0 16px 36px rgba(0,0,0,.50),
+      0 0 0 1px rgba(148,163,184,.30) inset;
+    z-index: 2;
   }
-  }
+}
   </style>
 </head>
 <body>
