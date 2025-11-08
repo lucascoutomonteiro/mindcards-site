@@ -43,9 +43,36 @@
     .btn:hover { transform: translateY(-1px); transition: .15s ease; }
 
     /* Showcase */
-    .frame { margin: 40px auto 24px; max-width: 880px; border-radius: 18px; overflow:hidden; border:1px solid rgba(148,163,184,.25); background: linear-gradient(180deg, rgba(148,163,184,.12), rgba(30,41,59,.35)); }
-    .screens { display:grid; grid-template-columns: repeat(3, 1fr); gap:1px; background: rgba(148,163,184,.2); }
-    .screens img { width:100%; display:block; aspect-ratio: 9/19.5; object-fit: cover; background: #0a0f1a; }
+    .frame {
+    margin: 40px auto 24px;
+      max-width: 880px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,.25);
+      background: linear-gradient(180deg, rgba(148,163,184,.12),
+                                   rgba(30,41,59,.35));
+    }
+    
+    .screens {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(148,163,184,.2);
+      position: relative; /* para isolar a pilha de z-index */
+    }
+    
+    .screens img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9 / 19.5;
+      object-fit: cover;
+      background: #0a0f1a;
+      position: relative;     /* permite z-index */
+      z-index: 0;
+      transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+      will-change: transform, filter;
+      outline: none;          /* ajuda com :focus-visible */
+    }
 
     /* Features */
     .section { padding: 56px 0; }
@@ -100,7 +127,7 @@
                 0 0 0 1px rgba(148,163,184,.35) inset;
     z-index: 1;
   }
-    
+  }
   </style>
 </head>
 <body>
