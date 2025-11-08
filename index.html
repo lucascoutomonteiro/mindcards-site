@@ -42,38 +42,23 @@
     .btn.secondary { background: transparent; color: var(--text); }
     .btn:hover { transform: translateY(-1px); transition: .15s ease; }
 
-   /* Showcase */
-/* Showcase — elimina a caixa externa */
-.frame {
-  display: contents;               /* faz o wrapper desaparecer */
-}
-
-/* fallback se o browser não suportar display: contents */
-@supports not (display: contents) {
-  .frame {
-    margin: 40px auto 24px;
-    max-width: 1000px;
-    background: transparent !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    overflow: visible !important;
-    box-shadow: none !important;
-  }
-}
+/* Showcase — grid alinhado e sem inclinação */
+.frame { display: contents; } /* elimina o wrapper */
 
 .screens {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;               /* separação real entre as imagens */
-  background: transparent; /* sem fundo de faixa */
-  padding: 8px 4px;        /* respiro nas laterais */
-  position: relative;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;                 /* espaço entre as imagens */
+  align-items: start;        /* alinha as três pelo topo */
+  background: transparent;
+  padding: 8px 4px;
 }
 
 .screens img {
-  width: 100%;
   display: block;
-  aspect-ratio: 9 / 19.5;
+  width: 100%;
+  aspect-ratio: 9 / 19.5;    /* mesma altura para todas */
+  height: auto;
   object-fit: cover;
   background: #0b1220;
   border-radius: 22px;
@@ -81,11 +66,11 @@
   position: relative;
   z-index: 0;
   box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  /* zera qualquer transformação herdada */
+  transform: none !important;
   transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
-  will-change: transform, filter;
   outline: none;
 }
-
     /* Features */
     .section { padding: 56px 0; }
     .section h2 { font-size: clamp(24px, 3.5vw, 32px); margin: 0 0 20px; }
@@ -122,19 +107,15 @@
 
   /* Destaque nas screenshots (desktop apenas) */
 @media (hover: hover) and (pointer: fine) {
-  /* ao entrar na grade, as demais ficam levemente apagadas */
   .screens:hover img {
-    filter: brightness(.88) saturate(.95);
+    filter: brightness(.9) saturate(.96);
   }
-
-  /* foco do mouse/teclado ganha destaque e sobe um pouco */
   .screens img:hover,
   .screens img:focus-visible {
-    transform: translateY(-8px) scale(1.03) rotate(0deg); /* reduz a inclinação no hover */
+    transform: translateY(-8px) scale(1.03); /* sem rotate */
     filter: brightness(1.05) saturate(1.05);
-    box-shadow:
-      0 16px 36px rgba(0,0,0,.50),
-      0 0 0 1px rgba(148,163,184,.30) inset;
+    box-shadow: 0 16px 36px rgba(0,0,0,.5),
+                0 0 0 1px rgba(148,163,184,.30) inset;
     z-index: 2;
   }
 }
